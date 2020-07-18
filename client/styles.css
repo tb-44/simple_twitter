@@ -9,9 +9,20 @@
     padding: 10px;
 }
 
+.example_b {
+    color: #fff !important;
+    text-transform: uppercase;
+    background-color: #08678a;
+    border-radius: 25px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    text-align: center;
+}
+
 .twitter-form,
 .loading {
-    width: 50%;
+    width: 45%;
     margin: 0 auto;
 }
 
