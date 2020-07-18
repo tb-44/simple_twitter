@@ -1,10 +1,12 @@
 const form = document.querySelector("form"); // grabbing an element on the page
 const errorElement = document.querySelector(".error-message");
 const loadingElement = document.querySelector(".loading");
-const commentElement = document.querySelector(".comment");
+const mewsElement = document.querySelector(".mews");
 const loadMoreElement = document.querySelector("#loadMore");
 const API_URL =
-  window.location.hostname === "127.0.0.1" ? "http://localhost:3000" : "0";
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000/v2/mews"
+    : "https://meower-api.now.sh/v2/mews";
 
 let skip = 0;
 let limit = 5;
@@ -20,7 +22,7 @@ document.addEventListener("scroll", () => {
   }
 });
 
-listAllComments();
+listAllMews();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -33,14 +35,14 @@ form.addEventListener("submit", (event) => {
     form.style.display = "none";
     loadingElement.style.display = "";
 
-    const obj = {
+    const mew = {
       name,
       content,
     };
 
     fetch(API_URL, {
       method: "POST",
-      body: JSON.stringify(obj),
+      body: JSON.stringify(mew),
       headers: {
         "content-type": "application/json",
       },
@@ -62,7 +64,7 @@ form.addEventListener("submit", (event) => {
         setTimeout(() => {
           form.style.display = "";
         }, 30000);
-        listAllComments();
+        listAllMews();
       })
       .catch((errorMessage) => {
         form.style.display = "";
@@ -78,36 +80,36 @@ form.addEventListener("submit", (event) => {
 
 function loadMore() {
   skip += limit;
-  listAllComments(false);
+  listAllMews(false);
 }
 
-function listAllComments(reset = true) {
+function listAllMews(reset = true) {
   loading = true;
   if (reset) {
-    commentElement.innerHTML = "";
+    mewsElement.innerHTML = "";
     skip = 0;
     finished = false;
   }
   fetch(`${API_URL}?skip=${skip}&limit=${limit}`)
     .then((response) => response.json())
     .then((result) => {
-      result.comments.forEach((obj) => {
+      result.mews.forEach((mew) => {
         const div = document.createElement("div");
 
         const header = document.createElement("h3");
-        header.textContent = obj.name;
+        header.textContent = mew.name;
 
         const contents = document.createElement("p");
-        contents.textContent = obj.content;
+        contents.textContent = mew.content;
 
         const date = document.createElement("small");
-        date.textContent = new Date(obj.created);
+        date.textContent = new Date(mew.created);
 
         div.appendChild(header);
         div.appendChild(contents);
         div.appendChild(date);
 
-        commentElement.appendChild(div);
+        mewsElement.appendChild(div);
       });
       loadingElement.style.display = "none";
       if (!result.meta.has_more) {

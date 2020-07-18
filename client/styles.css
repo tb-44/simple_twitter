@@ -9,20 +9,9 @@
     padding: 10px;
 }
 
-.example_b {
-    color: #fff !important;
-    text-transform: uppercase;
-    background-color: #08678a;
-    border-radius: 25px;
-    display: inline-block;
-    border: none;
-    transition: all 0.4s ease 0s;
-    text-align: center;
-}
-
-.twitter-form,
+.mew-form,
 .loading {
-    width: 45%;
+    width: 50%;
     margin: 0 auto;
 }
 
@@ -30,26 +19,26 @@
     text-align: center;
 }
 
-.comments {
+.mews {
     width: 80%;
     margin: 0 auto;
 }
 
-.comments>div {
+.mews>div {
     background: hsl(0, 0%, 95%);
     padding: 12px;
     border-radius: 4px;
 }
 
-.comments>div>h3 {
+.mews>div>h3 {
     word-wrap: break-word;
 }
 
-.comments>div>p {
+.mews>div>p {
     word-wrap: break-word;
 }
 
-.comments>div:not(:last-child) {
+.mews>div:not(:last-child) {
     margin-bottom: 8px;
 }
 
